@@ -4,17 +4,54 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Malvicino Hnos. S.R.L. — Distribución Mayorista desde 1949</title>
-<link rel="icon" href="image_318c48.png">
+
+<!-- SEO y Configuración Oficial para Google -->
+<meta name="description" content="Distribución mayorista B2B en Santa Fe y Rafaela. Más de 75 años de trayectoria uniendo la fábrica con su punto de venta. Línea tecnológica y alimenticia.">
+<link rel="canonical" href="https://malvicinohnos.github.io/">
+<meta name="google-site-verification" content="ctXqLJ1Cp3ebbLFUyRxVGdlw0nqABayKgG-YQGv9b84" />
+
+<!-- Íconos de Favoritos (Favicon) para Navegadores y Buscador -->
+<link rel="icon" type="image/png" sizes="192x192" href="https://malvicinohnos.github.io/image_318c48.png">
+<link rel="shortcut icon" href="https://malvicinohnos.github.io/image_318c48.png">
+<link rel="apple-touch-icon" href="https://malvicinohnos.github.io/image_318c48.png">
+
+<!-- Vista Previa para WhatsApp y Redes (Open Graph) -->
+<meta property="og:type" content="website">
 <meta property="og:site_name" content="Malvicino Hnos. S.R.L.">
+<meta property="og:title" content="Malvicino Hnos. S.R.L. — Distribución Mayorista desde 1949">
+<meta property="og:description" content="Más de 75 años uniendo la fábrica con su punto de venta. Distribución mayorista B2B en Santa Fe y Rafaela.">
+<meta property="og:url" content="https://malvicinohnos.github.io/">
+<meta property="og:image" content="https://malvicinohnos.github.io/image_318c48.png">
+
+<!-- Datos Estructurados Avanzados (Nombre del Sitio y Logo en Google) -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Malvicino Hnos. S.R.L.",
-  "url": "https://malvicinohnos.github.io/"
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://malvicinohnos.github.io/#website",
+      "url": "https://malvicinohnos.github.io/",
+      "name": "Malvicino Hnos. S.R.L.",
+      "alternateName": ["Malvicino Hnos", "Malvicino SRL", "Malvicino Hermanos"]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://malvicinohnos.github.io/#organization",
+      "name": "Malvicino Hnos. S.R.L.",
+      "url": "https://malvicinohnos.github.io/",
+      "logo": "https://malvicinohnos.github.io/image_318c48.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+54-9-342-610-8806",
+        "contactType": "sales",
+        "areaServed": "AR",
+        "availableLanguage": "Spanish"
+      }
+    }
+  ]
 }
 </script>
-<meta name="google-site-verification" content="ctXqLJ1Cp3ebbLFUyRxVGdlw0nqABayKgG-YQGv9b84" />
   
 <!-- Fuentes de Google -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -121,7 +158,7 @@
   }
   .btn-nav:hover{background:var(--accent);color:var(--ink) !important;}
 
-  .nav-toggle{display:none;background:none;border:none;color:var(--white);font-size:1.6rem;cursor:pointer;}
+  .nav-toggle{display:none;background:none;border:none;color:var(--white);font-size:1.6rem;cursor:pointer;z-index:1001;}
 
   /* ---------- HERO ---------- */
   .hero{
@@ -251,7 +288,7 @@
     border:1px solid rgba(212,175,55,0.3);
     padding:15px;
   }
-  .about-image img{width:100%;height:500px;object-fit:cover; border-radius: 2px;}
+  .about-image img{width:100%;height:auto;object-fit:cover; border-radius: 2px;}
   
   .about-image::before{
     content:'';position:absolute;top:-15px;left:-15px;
@@ -284,25 +321,84 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   .product-card:hover { transform: translateY(-8px); box-shadow: 0 15px 40px rgba(0,0,0,0.08); }
+  
+  /* FONDO BLANCO PURO ORIGINAL EN PRODUCTOS */
   .product-img{height:280px;width:100%;overflow:hidden;position:relative; border-radius: 6px 6px 0 0;}
   .product-img img{width:100%;height:100%;object-fit:contain;transition:transform .6s ease;}
   .product-card:hover .product-img img{transform:scale(1.08);}
+  
+  /* DISEÑO ORIGINAL CON CURVA CONTINUA SIN RECORTE */
   .product-tag{
-    position:absolute;top:15px;right:15px;background:var(--primary);color:var(--white);
-    padding:6px 15px;font-size:0.75rem;font-weight:800;letter-spacing:0.5px; border-radius: 20px;
+    position:absolute;
+    top:15px;
+    right:15px;
+    background:var(--primary);
+    color:var(--white);
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:6px 16px;
+    font-size:0.75rem;
+    font-weight:800;
+    letter-spacing:0.5px;
+    border-radius:999px;
+    z-index: 2;
   }
   .product-info{padding:30px;flex:1;display:flex;flex-direction:column;}
   .product-info h3{font-size:1.3rem;font-weight:800;margin-bottom:15px; color: var(--primary);}
   .product-info p{color:var(--text-light);font-size:0.95rem;margin-bottom:15px;flex:1;}
-  .btn-outline{
-    display:inline-flex;align-items:center;gap:10px;
-    color:var(--primary);text-decoration:none;font-weight:800;font-size:0.95rem;
-    border-bottom:2px solid var(--primary);padding-bottom:5px;align-self:flex-start;
-    transition:all .25s ease; text-transform: uppercase;
+  
+  /* BOTONERA INFERIOR DE TARJETA SEPARADA Y CLARA */
+  .product-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 8px;
   }
-  .btn-outline:hover{color:var(--accent);border-color:var(--accent);gap:15px;}
+  .btn-outline{
+    display:inline-flex;align-items:center;gap:8px;
+    color:var(--primary);text-decoration:none;font-weight:800;font-size:0.92rem;
+    border-bottom:2px solid var(--primary);padding-bottom:4px;
+    transition:color .25s ease, border-color .25s ease; text-transform: uppercase;
+  }
+  .btn-outline i {
+    font-size: 0.85rem;
+    transition: transform .25s ease;
+  }
+  .btn-outline:hover{color:var(--accent-dim);border-color:var(--accent);}
+  .btn-outline:hover i { transform: translateY(3px); }
 
-  /* ESTILOS DE LA NUEVA CAJITA DE PRECIOS MAYORISTAS */
+  .wa-action-wrap {
+    display: flex;
+    align-items: center;
+    padding-left: 14px;
+    border-left: 1px solid #e1e4e8;
+  }
+
+  .btn-wa-mini {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #f0fdf4;
+    color: #16a34a;
+    border: 1px solid #bbf7d0;
+    font-size: 1.05rem;
+    text-decoration: none;
+    transition: all .25s ease;
+    flex-shrink: 0;
+  }
+  .btn-wa-mini:hover {
+    background: var(--whatsapp);
+    color: var(--white);
+    border-color: var(--whatsapp);
+    transform: scale(1.08);
+  }
+
+  /* ESTILOS DE LA CAJITA DE PRECIOS MAYORISTAS */
   .caja-mayorista {
     background-color: #f4f6f8;
     border-radius: 8px;
@@ -387,10 +483,10 @@
   .form-group label{display:block;font-weight:700;margin-bottom:10px;font-size:0.9rem;color:var(--primary); text-transform: uppercase; letter-spacing: 0.5px;}
   .form-control{
     width:100%;padding:15px;border:1px solid #CBD5E1;border-radius:4px;
-    font-family:inherit;font-size:1rem;background:var(--bg-light);
+    font-family:inherit;font-size:1rem;background:var(--paper);
     transition:all .3s ease;
   }
-  .form-control:focus{outline:none;border-color:var(--accent);background:var(--white); box-shadow: 0 0 0 3px rgba(212,175,55,0.1);}
+  .form-control:focus{outline:none;border-color:var(--accent);background:var(--white); box-shadow: 0 0 0 3px rgba(212,175,55,0.15);}
   .form-note{
     font-size:0.9rem;color:var(--text-light);margin-bottom:25px;
     padding-left:15px;border-left:3px solid var(--accent); font-style: italic;
@@ -402,7 +498,7 @@
   }
   .btn-submit:hover{background:var(--accent);color:var(--primary); border-color: var(--accent);}
 
-  /* ---------- WHATSAPP ---------- */
+  /* ---------- WHATSAPP FLOTANTE ---------- */
   .whatsapp-float{
     position:fixed;bottom:40px;right:40px;
     width:65px;height:65px;background:var(--whatsapp);color:#fff;
@@ -424,7 +520,7 @@
 
   /* ---------- REVEAL ANIMATION ---------- */
   .reveal{opacity:0;transform:translateY(40px);transition:opacity 0.8s ease, transform 0.8s ease;}
-  .reveal.active{opacity:1;transform:translateY(0);}
+  .reveal.active{opacity:1;transform:none;}
 
   @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(30px); }
@@ -437,7 +533,7 @@
     .stat:nth-child(3){border-left:none;}
     .about,.area,.contact-grid{grid-template-columns:1fr;}
     .about{text-align:left;padding:80px 6%;}
-    .about-image img{height:400px;}
+    .about-image img{height:auto;}
     .contact-info,.contact-form{padding:40px;}
     .form-row{grid-template-columns:1fr;}
     .hero h1{font-size: 3rem;}
@@ -453,7 +549,7 @@
     }
     nav ul.open{transform:translateX(0);}
     .nav-toggle{display:block; margin-left: auto;}
-    .hero{padding:140px 6% 60px;}
+    .hero{padding:140px 6% 60px; background-attachment: scroll;}
     .stat-strip .wrap{grid-template-columns:1fr 1fr;}
     .stat {padding: 30px 15px;}
     .section{padding:80px 6%;}
@@ -484,9 +580,8 @@
 <section id="inicio" class="hero">
   <div class="hero-content">
     <div class="hero-eyebrow">Distribución Mayorista B2B</div>
-    <!-- EL TÍTULO "TU ENLACE" VUELVE AL FRENTE CON LAS PALABRAS DORADAS -->
     <h1>Tu enlace <span class="text-gold">comercial</span> y <span class="text-gold">logístico</span> B2B</h1>
-    <p class="hero-lead">Casi 70 años uniendo la fábrica con su punto de venta.</p>
+    <p class="hero-lead">Más de 75 años uniendo la fábrica con su punto de venta.</p>
     <p class="hero-desc">Gestionamos el volumen, los camiones y el traslado para la Línea Tecnológica exclusivamente en Santa Fe y Rafaela. Trato directo con fábrica, gestión logística integral y respaldo de dos generaciones.</p>
     <div class="hero-actions">
       <a href="#catalogo" class="btn-primary nav-scroll">Ver catálogo mayorista</a>
@@ -506,13 +601,12 @@
 
 <section id="nosotros" class="about">
   <div class="about-image reveal">
-<img src="camion_logistica.png.jpg" alt="Logística y Distribución Malvicino Hnos." style="max-width: 100%; height: auto; object-fit: cover;">
+    <img src="camion_logistica.png.jpg" alt="Logística y Distribución Malvicino Hnos." style="max-width: 100%; height: auto; object-fit: cover;">
   </div>
   <div class="about-text reveal">
     <span class="tag">LA EMPRESA</span>
-    <!-- PALABRA EN DORADO -->
     <h2>Evolución, experiencia y lealtad <span class="text-gold">comercial</span>.</h2>
-    <p>Con casi 70 años de trayectoria ininterrumpida, somos un referente indiscutido en la comercialización y distribución mayorista de la región.</p>
+    <p>Con más de 75 años de trayectoria ininterrumpida, somos un referente indiscutido en la comercialización y distribución mayorista de la región.</p>
     <p>Hoy, impulsados por la <span class="highlight">segunda generación</span> y operando desde nuestra sede administrativa en Santa Fe, mantenemos intactos los valores que nos hicieron grandes: absorber la carga operativa del comercio y velar porque sus estantes nunca estén vacíos.</p>
     <div class="about-quote">"Evitar intermediarios innecesarios no es una promesa — es la forma en que trabajamos desde el primer día."</div>
   </div>
@@ -536,7 +630,6 @@
         <h3>Sacacorchos Eléctrico</h3>
         <p>Mecanismo de extracción automática. Diseño elegante, ideal para vinotecas, regalos empresariales y bazares de alto nivel.</p>
         
-        <!-- NUEVA CAJITA DE PRECIOS -->
         <div class="caja-mayorista">
           <p class="aviso-precio">Valores de referencia estimativos (Sin IVA incluido)</p>
           <div class="datos-lista">
@@ -546,7 +639,14 @@
           </div>
         </div>
 
-        <a href="#contacto" class="btn-outline nav-scroll">Cotizar volumen <i class="fas fa-arrow-right"></i></a>
+        <div class="product-actions">
+          <a href="#contacto" class="btn-outline nav-scroll" data-product="Sacacorchos Eléctrico (Bulto x 30 un.)">Cotizar volumen <i class="fas fa-arrow-down"></i></a>
+          <div class="wa-action-wrap">
+            <a href="https://wa.me/5493426108806?text=Hola%20Malvicino%20Hnos.,%20me%20interesa%20cotizar%20el%20Sacacorchos%20El%C3%A9ctrico%20por%20mayor." target="_blank" rel="noopener" class="btn-wa-mini" title="Consultar este artículo directo por WhatsApp" aria-label="Consultar Sacacorchos Eléctrico por WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -554,13 +654,12 @@
     <div class="product-card reveal" style="transition-delay: 0.1s;">
       <div class="product-img">
         <span class="product-tag" style="background:var(--accent); color:var(--primary);">NOVEDAD</span>
-        <img src="Inflador Eléctrico Portátil.jpg" alt="Inflador Eléctrico">
+        <img src="Inflador Eléctrico Portátil.jpg" alt="Inflador Eléctrico Portátil">
       </div>
       <div class="product-info">
         <h3>Inflador Eléctrico Portátil</h3>
         <p>Batería recargable y medidor digital. Alta demanda en estaciones de servicio, casas de repuestos automotores y artículos del hogar.</p>
         
-        <!-- NUEVA CAJITA DE PRECIOS -->
         <div class="caja-mayorista">
           <p class="aviso-precio">Valores de referencia estimativos (Sin IVA incluido)</p>
           <div class="datos-lista">
@@ -570,7 +669,14 @@
           </div>
         </div>
 
-        <a href="#contacto" class="btn-outline nav-scroll">Cotizar volumen <i class="fas fa-arrow-right"></i></a>
+        <div class="product-actions">
+          <a href="#contacto" class="btn-outline nav-scroll" data-product="Inflador Eléctrico Portátil (Bulto x 20 un.)">Cotizar volumen <i class="fas fa-arrow-down"></i></a>
+          <div class="wa-action-wrap">
+            <a href="https://wa.me/5493426108806?text=Hola%20Malvicino%20Hnos.,%20me%20interesa%20cotizar%20el%20Inflador%20El%C3%A9ctrico%20Port%C3%A1til%20por%20mayor." target="_blank" rel="noopener" class="btn-wa-mini" title="Consultar este artículo directo por WhatsApp" aria-label="Consultar Inflador Eléctrico por WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -583,7 +689,6 @@
         <h3>Molino / Salero Eléctrico</h3>
         <p>Molienda ajustable con iluminación LED integrada. Un producto sofisticado destacado por su alta rotación en bazares y tiendas de diseño.</p>
         
-        <!-- NUEVA CAJITA DE PRECIOS -->
         <div class="caja-mayorista">
           <p class="aviso-precio">Valores de referencia estimativos (Sin IVA incluido)</p>
           <div class="datos-lista">
@@ -593,7 +698,14 @@
           </div>
         </div>
 
-        <a href="#contacto" class="btn-outline nav-scroll">Cotizar volumen <i class="fas fa-arrow-right"></i></a>
+        <div class="product-actions">
+          <a href="#contacto" class="btn-outline nav-scroll" data-product="Molino / Salero Eléctrico Set x2 (Bulto x 20 un.)">Cotizar volumen <i class="fas fa-arrow-down"></i></a>
+          <div class="wa-action-wrap">
+            <a href="https://wa.me/5493426108806?text=Hola%20Malvicino%20Hnos.,%20me%20interesa%20cotizar%20el%20Set%20de%20Molino%20y%20Salero%20El%C3%A9ctrico%20por%20mayor." target="_blank" rel="noopener" class="btn-wa-mini" title="Consultar este artículo directo por WhatsApp" aria-label="Consultar Molino Eléctrico por WhatsApp">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -602,7 +714,6 @@
 <section id="cobertura" class="area">
   <div class="area-text reveal">
     <span class="tag">COBERTURA</span>
-    <!-- PALABRA EN DORADO -->
     <h2>Gestión <span class="text-gold">logística</span>, sin sorpresas.</h2>
     <p>Operamos exclusivamente en la Provincia de Santa Fe y la ciudad de Rafaela para la distribución de la <strong>Línea de Tecnología Hogareña</strong>. <br><br><em> Nota: Para el rubro alimenticio nuestra zona de actuación es más amplia (incluyendo Córdoba, Entre Ríos y Corrientes). Utilice el formulario para más consultas.</em></p>
     
@@ -661,15 +772,19 @@
         <i class="fas fa-shield-halved"></i>
         <div>
           <h4>Respaldo Malvicino</h4>
-          <p>Casi 70 años de trayectoria avalan el cuidado y la seriedad comercial que ofrecemos a nuestros clientes.</p>
+          <p>Más de 75 años de trayectoria avalan el cuidado y la seriedad comercial que ofrecemos a nuestros clientes.</p>
         </div>
       </div>
     </div>
 
     <div class="contact-form">
       <form action="https://formsubmit.co/malvicinosrl@gmail.com" method="POST">
-        <input type="hidden" name="_subject" value="Nuevo contacto desde la Web">
+        <!-- Configuración interna de FormSubmit -->
+        <input type="hidden" name="_subject" value="Nuevo pedido / consulta mayorista desde la Web">
         <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_next" value="https://malvicinohnos.github.io/#contacto">
+        <input type="text" name="_honey" style="display:none">
 
         <div class="form-row">
           <div class="form-group">
@@ -678,7 +793,7 @@
           </div>
           <div class="form-group">
             <label>Correo electrónico de contacto</label>
-            <input type="email" name="Email" class="form-control" placeholder="compras@suempresa.com" required>
+            <input type="email" name="email" class="form-control" placeholder="compras@suempresa.com" required>
           </div>
         </div>
 
@@ -687,7 +802,6 @@
             <label>Nombre de la empresa o comercio</label>
             <input type="text" name="Empresa" class="form-control" placeholder="Ej: Distribuidora Norte S.A." required>
           </div>
-          <!-- CUIT OPCIONAL SIN LA ETIQUETA REQUIRED -->
           <div class="form-group">
             <label>CUIT y condición de IVA (Opcional)</label>
             <input type="text" name="CUIT" class="form-control" placeholder="Ej: 30-XXXXXXXX-X (Resp. Inscripto)">
@@ -696,7 +810,7 @@
 
         <div class="form-group">
           <label>Detalle de la solicitud</label>
-          <textarea name="Mensaje" class="form-control" rows="4" placeholder="Indique los productos de interés, volumen estimado y a qué ciudad se debe realizar el envío logístico." required></textarea>
+          <textarea id="mensajeInput" name="Mensaje" class="form-control" rows="4" placeholder="Indique los productos de interés, volumen estimado y a qué ciudad se debe realizar el envío logístico." required></textarea>
         </div>
 
         <p class="form-note">Si su comercio pertenece al rubro alimenticio, consúltenos: también gestionamos logística y abastecimiento mayorista a más provincias.</p>
@@ -730,6 +844,27 @@
   window.addEventListener("scroll", reveal);
   reveal(); 
 
+  const toggle = document.getElementById('navToggle');
+  const toggleIcon = toggle.querySelector('i');
+  const navList = document.getElementById('navList');
+
+  function closeMenu() {
+    navList.classList.remove('open');
+    toggleIcon.classList.remove('fa-xmark');
+    toggleIcon.classList.add('fa-bars');
+  }
+
+  toggle.addEventListener('click', ()=> {
+    const isOpen = navList.classList.toggle('open');
+    if (isOpen) {
+      toggleIcon.classList.remove('fa-bars');
+      toggleIcon.classList.add('fa-xmark');
+    } else {
+      toggleIcon.classList.remove('fa-xmark');
+      toggleIcon.classList.add('fa-bars');
+    }
+  });
+
   document.querySelectorAll('.nav-scroll').forEach(a=>{
     a.addEventListener('click', function(e){
       e.preventDefault();
@@ -739,13 +874,19 @@
       const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
       window.scrollTo({top, behavior:'smooth'});
       
-      document.getElementById('navList').classList.remove('open');
+      closeMenu();
+
+      // Si el botón tiene un producto asignado, pre-llenar el formulario
+      const product = this.getAttribute('data-product');
+      if (product) {
+        const textarea = document.getElementById('mensajeInput');
+        if (textarea) {
+          textarea.value = `Hola, me interesa solicitar cotización mayorista de: ${product}.\nVolumen estimado y localidad de entrega: `;
+          setTimeout(() => textarea.focus(), 600);
+        }
+      }
     });
   });
-
-  const toggle = document.getElementById('navToggle');
-  const navList = document.getElementById('navList');
-  toggle.addEventListener('click', ()=> navList.classList.toggle('open'));
 </script>
 
 </body>
