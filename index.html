@@ -484,8 +484,41 @@
     background:var(--primary);color:var(--white);border:2px solid var(--primary);
     padding:18px 40px;font-size:1.05rem;font-weight:800;cursor:pointer;
     transition:all .3s ease; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px;
+    display: inline-flex; align-items: center; gap: 10px;
   }
   .btn-submit:hover{background:var(--accent);color:var(--primary); border-color: var(--accent);}
+  .btn-submit:disabled{opacity: 0.7; cursor: not-allowed;}
+
+  /* CARTEL DE CONFIRMACIÓN DE ENVÍO */
+  .form-success-box {
+    display: none;
+    align-items: flex-start;
+    gap: 14px;
+    background-color: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    border-left: 4px solid #10b981;
+    color: #065f46;
+    padding: 16px 20px;
+    border-radius: 6px;
+    margin-bottom: 25px;
+    animation: fadeInUp 0.4s ease forwards;
+  }
+  .form-success-box i {
+    font-size: 1.35rem;
+    color: #10b981;
+    margin-top: 2px;
+  }
+  .form-success-box strong {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.98rem;
+    margin-bottom: 3px;
+    color: #064e3b;
+  }
+  .form-success-box span {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
 
   /* ---------- WHATSAPP FLOTANTE ---------- */
   .whatsapp-float{
@@ -769,11 +802,11 @@
 
     <div class="contact-form">
       <!-- Envío encriptado con código oculto de FormSubmit -->
-      <form action="https://formsubmit.co/5ec15717a6be8e3fbe00413728552a37" method="POST">
+      <form id="mayoristaForm" action="https://formsubmit.co/5ec15717a6be8e3fbe00413728552a37" method="POST">
         <input type="hidden" name="_subject" value="Nuevo pedido / consulta mayorista desde la Web">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_next" value="https://malvicinohnos.github.io/#contacto">
+        <input type="hidden" name="_next" value="https://malvicinohnos.github.io/?enviado=1#contacto">
         <input type="text" name="_honey" style="display:none">
 
         <div class="form-row">
@@ -805,7 +838,16 @@
 
         <p class="form-note">Si su comercio pertenece al rubro alimenticio, consúltenos: también gestionamos logística y abastecimiento mayorista a más provincias.</p>
 
-        <button type="submit" class="btn-submit">Enviar solicitud mayorista</button>
+        <!-- Cartel de éxito oculto por defecto -->
+        <div id="formSuccess" class="form-success-box" role="status" aria-live="polite">
+          <i class="fas fa-circle-check"></i>
+          <div>
+            <strong>¡Solicitud enviada con éxito!</strong>
+            <span>Hemos recibido su consulta correctamente. Un asesor comercial se comunicará con usted a la brevedad.</span>
+          </div>
+        </div>
+
+        <button type="submit" id="submitBtn" class="btn-submit">Enviar solicitud mayorista</button>
       </form>
     </div>
   </div>
@@ -875,6 +917,48 @@
           setTimeout(() => textarea.focus(), 600);
         }
       }
+    });
+  });
+
+  // CONFIRMACIÓN VISUAL DE ENVÍO DEL FORMULARIO
+  const mayoristaForm = document.getElementById('mayoristaForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const formSuccess = document.getElementById('formSuccess');
+
+  // Si vuelve redirigido con ?enviado=1, mostrar el cartel verde
+  if (window.location.search.includes('enviado=1')) {
+    formSuccess.style.display = 'flex';
+    if (window.history.replaceState) {
+      window.history.replaceState(null, '', window.location.pathname + window.location.hash);
+    }
+  }
+
+  // Envío directo sin recargar la página y aviso instantáneo
+  mayoristaForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    formSuccess.style.display = 'none';
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando solicitud...';
+
+    const formData = new FormData(mayoristaForm);
+
+    fetch('https://formsubmit.co/ajax/5ec15717a6be8e3fbe00413728552a37', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: formData
+    })
+    .then(response => {
+      if (response.ok) {
+        mayoristaForm.reset();
+        formSuccess.style.display = 'flex';
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Enviar solicitud mayorista';
+      } else {
+        mayoristaForm.submit();
+      }
+    })
+    .catch(() => {
+      mayoristaForm.submit();
     });
   });
 </script>
