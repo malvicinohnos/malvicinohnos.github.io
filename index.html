@@ -56,7 +56,7 @@
 <!-- Fuentes de Google -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <!-- Iconos FontAwesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -72,7 +72,7 @@
     --paper-dim: #EAE6DC;
     --white: #FFFFFF;
     --text-main: #26303D;
-    --text-light: #6B7280;
+    --text-light: #5A6575;
     --whatsapp: #25D366;
   }
 
@@ -84,8 +84,15 @@
     color:var(--text-main);
     line-height:1.7;
     overflow-x:hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
-  h1,h2,h3,h4{font-family:'Montserrat',sans-serif;color:var(--ink);}
+  h1,h2,h3,h4{
+    font-family:'Montserrat',sans-serif;
+    color:var(--ink);
+    text-rendering: optimizeLegibility;
+  }
   a{color:inherit;}
   img{max-width:100%;display:block;}
 
@@ -98,38 +105,108 @@
 
   .wrap{max-width:1280px;margin:0 auto;padding-left:6%;padding-right:6%;}
 
-  /* EL DORADO SÓLIDO Y PROFESIONAL */
   .text-gold {
     color: var(--accent) !important;
   }
 
-  /* ---------- HEADER ---------- */
+  /* ---------- BARRA DE PROGRESO DE LECTURA ---------- */
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), #f3d467);
+    width: 0%;
+    z-index: 1002;
+    transition: width 0.1s ease-out;
+  }
+
+  /* ---------- HEADER Y TOPBAR CORPORATIVA ---------- */
   header{
     position:fixed;
     top:0;
     left:0;
     width:100%; 
     z-index:1000;
-    background:rgba(5,13,26,0.95);
+    background:rgba(5,13,26,0.96);
     backdrop-filter:blur(14px);
-    border-bottom:1px solid rgba(212,175,55,0.18);
-    transition:padding .3s ease;
+    border-bottom:1px solid rgba(212,175,55,0.2);
+    transition: all .35s ease;
+  }
+
+  .topbar {
+    background: #030811;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+    padding: 7px 5%;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.78);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: max-height 0.35s ease, padding 0.35s ease, opacity 0.25s ease;
+    max-height: 42px;
+    overflow: hidden;
+  }
+  header.scrolled .topbar {
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    opacity: 0;
+    border-bottom: none;
+  }
+  .topbar-left, .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .topbar span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    letter-spacing: 0.2px;
+  }
+  .topbar strong {
+    color: var(--white);
+    font-weight: 700;
+  }
+  .topbar-sep {
+    color: var(--accent);
+    font-weight: 700;
+    padding: 0 4px;
+  }
+  .topbar i {
+    color: var(--accent);
+    font-size: 0.75rem;
+  }
+  .status-dot {
+    width: 7px;
+    height: 7px;
+    background: #10b981;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 6px #10b981;
   }
   
   .nav-inner{
     width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
     padding: 15px 5%; 
     display: flex;
     justify-content: space-between; 
     align-items: center;
+    transition: padding 0.3s ease;
+  }
+  header.scrolled .nav-inner {
+    padding: 11px 5%;
   }
 
   .logo-container{display:flex;align-items:center;gap:14px;text-decoration:none;}
-  .logo-container img{height:45px; filter: contrast(1.1);}
+  .logo-container img{height:45px; filter: contrast(1.1); transition: height 0.3s ease;}
+  header.scrolled .logo-container img{height:40px;}
   .logo-text{font-size:1.25rem;font-weight:800;color:var(--white);letter-spacing:0.3px;line-height:1.15;text-transform: uppercase;}
   .logo-text span{color:var(--accent);display:block;font-size:0.75rem;letter-spacing:3px;font-weight:700;margin-top:2px;}
 
-  /* MENÚ FORZADO A LA DERECHA */
   nav {
     display: flex;
     justify-content: flex-end;
@@ -137,26 +214,30 @@
     margin-left: auto;
   }
   
-  nav ul{list-style:none;display:flex;gap:40px;align-items:center; margin: 0; padding: 0;}
+  nav ul{list-style:none;display:flex;gap:38px;align-items:center; margin: 0; padding: 0;}
   nav ul li a{
     text-decoration:none;color:rgba(255,255,255,0.85);font-weight:600;
-    font-size:0.95rem;letter-spacing:0.2px;transition:color .25s ease;
+    font-size:0.93rem;letter-spacing:0.3px;transition:color .25s ease;
     cursor:pointer;position:relative;
   }
   nav ul li a:not(.btn-nav)::after{
     content:'';position:absolute;left:0;bottom:-6px;width:0;height:2px;
     background:var(--accent);transition:width .25s ease;
   }
-  nav ul li a:not(.btn-nav):hover{color:var(--white);}
-  nav ul li a:not(.btn-nav):hover::after{width:100%;}
+  nav ul li a:not(.btn-nav):hover,
+  nav ul li a.active-link:not(.btn-nav){color:var(--white);}
+  nav ul li a:not(.btn-nav):hover::after,
+  nav ul li a.active-link:not(.btn-nav)::after{width:100%;}
 
   .btn-nav{
     border:1px solid var(--accent);color:var(--accent) !important;
-    padding:10px 24px;font-size:0.9rem;font-weight:700;
+    padding:10px 24px;font-size:0.88rem;font-weight:700;
     transition:all .3s ease; border-radius: 4px;
-    margin-left: 10px;
+    margin-left: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
   }
-  .btn-nav:hover{background:var(--accent);color:var(--ink) !important;}
+  .btn-nav:hover{background:var(--accent);color:var(--ink) !important; transform: translateY(-1px);}
 
   .nav-toggle{display:none;background:none;border:none;color:var(--white);font-size:1.6rem;cursor:pointer;z-index:1001;}
 
@@ -164,82 +245,112 @@
   .hero{
     min-height:100vh;
     background:
-      linear-gradient(180deg, rgba(5,13,26,0.7) 0%, rgba(5,13,26,0.85) 100%),
+      linear-gradient(180deg, rgba(5,13,26,0.74) 0%, rgba(5,13,26,0.90) 100%),
       url('https://images.unsplash.com/photo-1553413077-190dd305871c?q=80&w=2200&auto=format&fit=crop') center/cover fixed;
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:100px 6% 60px;
+    padding:135px 6% 70px;
     position:relative;
     text-align: center;
   }
   .hero-content{
-    max-width:900px;
+    max-width:920px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     animation: fadeInUp 1s ease forwards;
   }
   .hero-eyebrow{
-    display:inline-flex;align-items:center;gap:12px;margin-bottom:25px;
-    color:var(--accent);font-size:0.9rem;font-weight:700;letter-spacing:1px;
+    display:inline-flex;align-items:center;gap:10px;margin-bottom:24px;
+    color:var(--accent);font-size:0.85rem;font-weight:700;letter-spacing:1.5px;
     text-transform: uppercase;
-    border: 1px solid var(--accent);
-    padding: 6px 20px;
+    border: 1px solid rgba(212,175,55,0.55);
+    padding: 7px 22px;
     border-radius: 30px;
-    background: rgba(212, 175, 55, 0.1);
+    background: rgba(5, 13, 26, 0.55);
+    backdrop-filter: blur(6px);
   }
   .hero h1{
-    font-size:clamp(2.8rem, 5vw, 4.2rem);
-    font-weight:800;line-height:1.15;color:var(--white);
-    letter-spacing:-1px;margin-bottom:25px;
-    text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    font-size:clamp(2.6rem, 5vw, 4.2rem);
+    font-weight:800;line-height:1.12;color:var(--white);
+    letter-spacing:-1px;margin-bottom:22px;
+    text-shadow: 0 4px 24px rgba(0,0,0,0.55);
   }
   .hero-lead {
-    font-size: 1.4rem;
+    font-size: clamp(1.18rem, 2vw, 1.42rem);
     font-weight: 600;
     color: var(--white);
-    margin-bottom: 25px;
-    letter-spacing: -0.3px;
+    margin-bottom: 22px;
+    letter-spacing: -0.2px;
     text-shadow: 0 2px 10px rgba(0,0,0,0.5);
   }
   .hero-desc{
-    font-size:1.15rem;color:rgba(255,255,255,0.85);
-    max-width:750px;margin-bottom:40px;font-weight:400; line-height: 1.6;
+    font-size:1.1rem;color:rgba(255,255,255,0.86);
+    max-width:740px;margin:0 auto 40px;font-weight:400; line-height: 1.65;
   }
-  .hero-actions{display:flex;gap:20px;flex-wrap:wrap;align-items:center; justify-content: center;}
+  .hero-actions{display:flex;gap:22px;flex-wrap:wrap;align-items:center; justify-content: center;}
 
   .btn-primary{
     display:inline-flex;align-items:center;gap:12px;
     background:var(--accent);color:var(--ink);
     padding:16px 36px;text-decoration:none;
-    font-weight:800;font-size:1.05rem;letter-spacing:0.2px;
+    font-weight:800;font-size:1rem;letter-spacing:0.4px;
     transition:all .3s ease;border:2px solid var(--accent);
     border-radius: 4px;
+    text-transform: uppercase;
   }
-  .btn-primary:hover{background:transparent;color:var(--accent);}
+  .btn-primary:hover{background:transparent;color:var(--accent); transform: translateY(-2px);}
 
   .btn-ghost{
     display:inline-flex;align-items:center;gap:10px;
     color:var(--white);text-decoration:none;
     padding:16px 20px;font-weight:600;font-size:1rem;
-    border-bottom:2px solid rgba(255,255,255,0.3);
-    transition:border-color .3s ease;
+    border-bottom:2px solid rgba(255,255,255,0.35);
+    transition:all .3s ease;
   }
   .btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+
+  /* Trust badges debajo del hero */
+  .hero-badges {
+    margin-top: 48px;
+    padding-top: 28px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    display: flex;
+    gap: 36px;
+    flex-wrap: wrap;
+    justify-content: center;
+    color: rgba(255,255,255,0.78);
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .hero-badges div {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+  .hero-badges i {
+    color: var(--accent);
+  }
 
   /* ---------- STAT STRIP ---------- */
   .stat-strip{
     background:var(--ink);
-    border-top:1px solid rgba(212,175,55,0.25);
+    border-top:1px solid rgba(212,175,55,0.3);
+    border-bottom:1px solid rgba(212,175,55,0.15);
   }
   .stat-strip .wrap{
     display:grid;grid-template-columns:repeat(4,1fr);
   }
   .stat{
-    padding:40px 30px;
+    padding:42px 28px;
     border-left:1px solid rgba(255,255,255,0.08);
     text-align:center;
+    transition: background 0.3s ease;
+  }
+  .stat:hover {
+    background: rgba(255,255,255,0.02);
   }
   .stat:first-child{border-left:none;}
   .stat .num{
@@ -247,85 +358,118 @@
     font-size:2.6rem;color:var(--accent);letter-spacing:-1px;line-height:1;
   }
   .stat .label{
-    margin-top:10px;color:rgba(255,255,255,0.7);
-    font-size:0.9rem;font-weight:600;letter-spacing:0.5px;
+    margin-top:10px;color:var(--white);
+    font-size:0.88rem;font-weight:700;letter-spacing:0.6px;
     text-transform: uppercase;
+  }
+  .stat .sublabel{
+    margin-top:4px;color:rgba(255,255,255,0.55);
+    font-size:0.78rem;
   }
 
   /* ---------- SECTION SCAFFOLD ---------- */
-  .section{padding:100px 6%;}
+  .section{
+    padding:105px max(6%, calc((100% - 1280px) / 2));
+  }
   .section-head{
     display:flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 15px;
+    gap: 14px;
     margin-bottom:60px;
     border-bottom:2px solid var(--paper-dim);
     padding-bottom:30px;
   }
   .section-head .tag{
-    color:var(--accent-dim);font-weight:800;font-size:0.9rem;
-    letter-spacing:1px;margin-bottom:5px;display:inline-block;
+    color:var(--accent-dim);font-weight:800;font-size:0.84rem;
+    letter-spacing:1.8px;display:inline-flex;align-items:center;gap:10px;
+    text-transform: uppercase;
+  }
+  .section-head .tag::before,
+  .section-head .tag::after {
+    content: '';
+    width: 24px;
+    height: 1.5px;
+    background: var(--accent);
+    display: inline-block;
   }
   .section-head h2{
-    font-size:clamp(2rem,3.2vw,2.8rem);font-weight:800;
-    letter-spacing:-0.5px;max-width:620px;line-height:1.15;
+    font-size:clamp(2rem,3.2vw,2.75rem);font-weight:800;
+    letter-spacing:-0.5px;max-width:680px;line-height:1.15;
+    margin: 0 auto;
   }
   .section-head p{
-    color:var(--text-light);max-width:600px;font-size:1.05rem; font-weight: 500;
+    color:var(--text-light);max-width:620px;font-size:1.05rem; font-weight: 500;
     margin: 0 auto;
   }
 
   /* ---------- ABOUT ---------- */
   .about{
     background:var(--ink);color:var(--white);
-    padding:110px 6%;
+    padding:110px max(6%, calc((100% - 1280px) / 2));
     display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
   }
   .about-image{
     position:relative;
     border:1px solid rgba(212,175,55,0.3);
     padding:15px;
+    background: rgba(255,255,255,0.02);
   }
   .about-image img{width:100%;height:auto;object-fit:cover; border-radius: 2px;}
   
   .about-image::before{
     content:'';position:absolute;top:-15px;left:-15px;
     width:70px;height:70px;border-top:3px solid var(--accent);border-left:3px solid var(--accent);
+    pointer-events: none;
   }
   .about-image::after{
     content:'';position:absolute;bottom:-15px;right:-15px;
     width:70px;height:70px;border-bottom:3px solid var(--accent);border-right:3px solid var(--accent);
+    pointer-events: none;
   }
-  .about-text .tag{color:var(--accent);font-weight:800;font-size:0.9rem;letter-spacing:1px;display:block;margin-bottom:15px;}
+  .about-text .tag{
+    color:var(--accent);font-weight:800;font-size:0.85rem;letter-spacing:1.8px;
+    display:inline-flex;align-items:center;gap:10px;margin-bottom:15px;
+  }
+  .about-text .tag::before {
+    content: ''; width: 28px; height: 2px; background: var(--accent); display: inline-block;
+  }
   .about-text h2{color:var(--white);font-size:clamp(2rem,3vw,2.6rem);line-height:1.2;font-weight:800;letter-spacing:-0.5px;margin-bottom:25px;}
-  .about-text p{color:rgba(255,255,255,0.75);font-size:1.1rem;margin-bottom:20px;max-width:550px;}
+  .about-text p{color:rgba(255,255,255,0.8);font-size:1.08rem;margin-bottom:20px;max-width:560px;}
   .about-text .highlight{color:var(--accent);font-weight:700;}
   .about-quote{
-    margin-top:40px;padding-left:20px;border-left:3px solid var(--accent);
-    font-family:'Montserrat',sans-serif;font-weight:600;font-size:1.1rem;
-    color:var(--white);line-height:1.6;max-width:500px; font-style: italic;
+    margin-top:36px;padding:18px 24px;border-left:3px solid var(--accent);
+    background: rgba(255,255,255,0.03);
+    font-family:'Montserrat',sans-serif;font-weight:600;font-size:1.05rem;
+    color:var(--white);line-height:1.6;max-width:540px; font-style: italic;
+    border-radius: 0 4px 4px 0;
   }
 
   /* ---------- PRODUCTS ---------- */
   .products-grid{
-    display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:30px;
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px;
+    max-width: 1280px;
+    margin: 0 auto;
   }
   .product-card{
     background:var(--white);
     display:flex;flex-direction:column;
-    border:1px solid var(--paper-dim);
+    border:1px solid #E2DDD2;
     border-radius: 6px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 30px rgba(11,25,44,0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   }
-  .product-card:hover { transform: translateY(-8px); box-shadow: 0 15px 40px rgba(0,0,0,0.08); }
+  .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 42px rgba(11,25,44,0.09);
+    border-color: rgba(212,175,55,0.45);
+  }
   
   /* FONDO BLANCO PURO ORIGINAL EN PRODUCTOS */
-  .product-img{height:280px;width:100%;overflow:hidden;position:relative; border-radius: 6px 6px 0 0;}
+  .product-img{height:280px;width:100%;overflow:hidden;position:relative; border-radius: 6px 6px 0 0; background: #FFFFFF;}
   .product-img img{width:100%;height:100%;object-fit:contain;transition:transform .6s ease;}
-  .product-card:hover .product-img img{transform:scale(1.08);}
+  .product-card:hover .product-img img{transform:scale(1.06);}
   
   /* DISEÑO ORIGINAL EXACTO DE LAS ETIQUETAS */
   .product-tag{
@@ -333,61 +477,11 @@
     padding:6px 15px;font-size:0.75rem;font-weight:800;letter-spacing:0.5px; border-radius: 20px;
     z-index: 2;
   }
-  .product-info{padding:30px;flex:1;display:flex;flex-direction:column;}
-  .product-info h3{font-size:1.3rem;font-weight:800;margin-bottom:15px; color: var(--primary);}
-  .product-info p{color:var(--text-light);font-size:0.95rem;margin-bottom:15px;flex:1;}
+  .product-info{padding:28px 30px 30px;flex:1;display:flex;flex-direction:column; border-top: 1px solid #F2EFE9;}
+  .product-info h3{font-size:1.3rem;font-weight:800;margin-bottom:10px; color: var(--primary);}
+  .product-info p{color:var(--text-light);font-size:0.94rem;margin-bottom:18px;flex:1; line-height: 1.6;}
   
-  /* BOTONERA INFERIOR DE TARJETA SEPARADA Y CLARA */
-  .product-actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: auto;
-    padding-top: 8px;
-  }
-  .btn-outline{
-    display:inline-flex;align-items:center;gap:8px;
-    color:var(--primary);text-decoration:none;font-weight:800;font-size:0.92rem;
-    border-bottom:2px solid var(--primary);padding-bottom:4px;
-    transition:color .25s ease, border-color .25s ease; text-transform: uppercase;
-  }
-  .btn-outline i {
-    font-size: 0.85rem;
-    transition: transform .25s ease;
-  }
-  .btn-outline:hover{color:var(--accent-dim);border-color:var(--accent);}
-  .btn-outline:hover i { transform: translateY(3px); }
-
-  .wa-action-wrap {
-    display: flex;
-    align-items: center;
-    padding-left: 14px;
-    border-left: 1px solid #e1e4e8;
-  }
-
-  .btn-wa-mini {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 34px;
-    height: 34px;
-    border-radius: 50%;
-    background: #f0fdf4;
-    color: #16a34a;
-    border: 1px solid #bbf7d0;
-    font-size: 1.05rem;
-    text-decoration: none;
-    transition: all .25s ease;
-    flex-shrink: 0;
-  }
-  .btn-wa-mini:hover {
-    background: var(--whatsapp);
-    color: var(--white);
-    border-color: var(--whatsapp);
-    transform: scale(1.08);
-  }
-
-  /* ESTILOS DE LA CAJITA DE PRECIOS MAYORISTAS */
+  /* CAJITA DE PRECIOS MAYORISTAS FIJA */
   .caja-mayorista {
     background-color: #f4f6f8;
     border-radius: 8px;
@@ -423,66 +517,250 @@
     color: #0b1c31;
   }
 
+  /* BOTONERA INFERIOR DE TARJETA */
+  .product-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 6px;
+  }
+  .btn-outline{
+    display:inline-flex;align-items:center;gap:8px;
+    color:var(--primary);text-decoration:none;font-weight:800;font-size:0.9rem;
+    border-bottom:2px solid var(--primary);padding-bottom:4px;
+    transition:color .25s ease, border-color .25s ease; text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .btn-outline i {
+    font-size: 0.82rem;
+    transition: transform .25s ease;
+  }
+  .btn-outline:hover{color:var(--accent-dim);border-color:var(--accent);}
+  .btn-outline:hover i { transform: translateY(3px); }
+
+  .wa-action-wrap {
+    display: flex;
+    align-items: center;
+    padding-left: 14px;
+    border-left: 1px solid #e1e4e8;
+  }
+
+  .btn-wa-mini {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #f0fdf4;
+    color: #16a34a;
+    border: 1px solid #bbf7d0;
+    font-size: 1.05rem;
+    text-decoration: none;
+    transition: all .25s ease;
+    flex-shrink: 0;
+  }
+  .btn-wa-mini:hover {
+    background: var(--whatsapp);
+    color: var(--white);
+    border-color: var(--whatsapp);
+    transform: scale(1.08);
+  }
+
+  /* ---------- CIRCUITO OPERATIVO B2B (3 PASOS) ---------- */
+  .workflow-strip {
+    max-width: 1280px;
+    margin: 55px auto 0;
+    background: var(--primary);
+    color: var(--white);
+    border-radius: 8px;
+    padding: 32px 40px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    border: 1px solid rgba(212,175,55,0.28);
+  }
+  .wf-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .wf-num {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 1.35rem;
+    color: var(--accent);
+    background: rgba(212,175,55,0.12);
+    border: 1px solid rgba(212,175,55,0.35);
+    width: 42px;
+    height: 42px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .wf-text h4 {
+    color: var(--white);
+    font-size: 0.98rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+  .wf-text p {
+    color: rgba(255,255,255,0.75);
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
   /* ---------- OPERATION AREA ---------- */
   .area{
     background:var(--white);
-    padding:100px 6%;
+    padding:105px max(6%, calc((100% - 1280px) / 2));
     display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;
+    border-top: 1px solid var(--paper-dim);
+    border-bottom: 1px solid var(--paper-dim);
   }
-  .area-text .tag{color:var(--accent-dim);font-weight:800;font-size:0.9rem;letter-spacing:1px;display:block;margin-bottom:15px;}
+  .area-text .tag{
+    color:var(--accent-dim);font-weight:800;font-size:0.85rem;letter-spacing:1.8px;
+    display:inline-flex;align-items:center;gap:10px;margin-bottom:15px;
+  }
+  .area-text .tag::before {
+    content: ''; width: 28px; height: 2px; background: var(--accent); display: inline-block;
+  }
   .area-text h2{font-size:clamp(2rem,2.6vw,2.5rem);font-weight:800;margin-bottom:20px;letter-spacing:-0.4px;}
-  .area-text p{color:var(--text-light);margin-bottom:15px;max-width:500px; font-size: 1.05rem;}
-  .area-list{list-style:none;margin-top:30px;}
+  .area-text p{color:var(--text-light);margin-bottom:15px;max-width:520px; font-size: 1.04rem;}
+  .area-list{list-style:none;margin-top:28px;}
   .area-list li{
-    display:flex;align-items:flex-start;gap:15px;padding:15px 0;
-    border-bottom:1px solid rgba(11,25,44,0.1);font-weight:600;color:var(--primary);
+    display:flex;align-items:flex-start;gap:15px;padding:14px 0;
+    border-bottom:1px solid rgba(11,25,44,0.09);font-weight:600;color:var(--primary);
   }
-  .area-list li i{color:var(--accent);font-size: 1.2rem; margin-top: 3px;}
+  .area-list li i{color:var(--accent);font-size: 1.15rem; margin-top: 4px;}
+  
   .area-visual{
-    border:2px solid rgba(11,25,44,0.08);
-    background:var(--paper);padding:50px; border-radius: 8px;
+    border:1px solid #DCD6C8;
+    background:var(--paper);padding:46px; border-radius: 8px;
+    position: relative;
+    box-shadow: 0 12px 35px rgba(11,25,44,0.04);
+  }
+  .area-visual-badge {
+    display: inline-block;
+    background: var(--primary);
+    color: var(--accent);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    padding: 5px 12px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    text-transform: uppercase;
   }
   .area-visual .big{
-    font-family:'Montserrat',sans-serif;font-weight:900;font-size:3.5rem;
-    color:var(--primary);letter-spacing:-1.5px;line-height:1.1;
+    font-family:'Montserrat',sans-serif;font-weight:900;font-size:clamp(2.6rem, 3.5vw, 3.4rem);
+    color:var(--primary);letter-spacing:-1.5px;line-height:1.08;
   }
   .area-visual .big span{color:var(--accent);}
-  .area-visual .caption{color:var(--text-light);margin-top:15px;font-size:1rem; font-weight: 500;}
-  .area-visual hr{border:none;border-top:2px solid rgba(11,25,44,0.1);margin:30px 0;}
+  .area-visual .caption{color:var(--text-light);margin-top:12px;font-size:0.96rem; font-weight: 500;}
+  .area-visual hr{border:none;border-top:1px solid rgba(11,25,44,0.12);margin:26px 0;}
+  .province-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+  .province-pill {
+    background: var(--white);
+    border: 1px solid #d5cfc2;
+    color: var(--primary);
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
 
   /* ---------- CONTACT ---------- */
-  .contact-section{background:var(--paper);padding:100px 6%;}
+  .contact-section{
+    background:var(--paper);
+    padding:105px max(6%, calc((100% - 1280px) / 2));
+  }
   .contact-grid{
+    max-width: 1280px;
+    margin: 0 auto;
     display:grid;grid-template-columns:1fr 1.5fr;
     background:var(--white);
-    box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+    box-shadow: 0 18px 45px rgba(11,25,44,0.06);
     border-radius: 8px; overflow: hidden;
+    border: 1px solid #E2DDD2;
   }
-  .contact-info{background:var(--primary);padding:60px;color:var(--white);}
-  .contact-info h3{font-size:1.8rem;color:var(--white);font-weight:800;margin-bottom:40px;}
-  .contact-item{display:flex;align-items:flex-start;gap:20px;margin-bottom:35px;}
-  .contact-item i{font-size:1.4rem;color:var(--accent);margin-top:4px;width:25px; text-align: center;}
+  .contact-info{background:var(--primary);padding:60px 50px;color:var(--white); position: relative;}
+  .contact-info h3{font-size:1.75rem;color:var(--white);font-weight:800;margin-bottom:38px;}
+  .contact-item{display:flex;align-items:flex-start;gap:20px;margin-bottom:34px;}
+  .contact-item i{font-size:1.35rem;color:var(--accent);margin-top:4px;width:25px; text-align: center;}
   
-  .contact-item h4{font-size:1.1rem;margin-bottom:8px;color:#FFFFFF !important;font-weight:800;}
-  .contact-item p{color:#FFFFFF !important;font-size:0.95rem; line-height: 1.6;}
+  .contact-item h4{font-size:1.06rem;margin-bottom:8px;color:#FFFFFF !important;font-weight:800;}
+  .contact-item p{color:rgba(255,255,255,0.88) !important;font-size:0.94rem; line-height: 1.6;}
+
+  /* Cuadro prolijo para el Horario Operativo */
+  .schedule-box {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(212, 175, 55, 0.22);
+    border-radius: 6px;
+    padding: 12px 15px;
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .schedule-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 14px;
+    font-size: 0.88rem;
+    line-height: 1.45;
+  }
+  .schedule-day {
+    color: var(--accent);
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .schedule-hours {
+    color: var(--white);
+    text-align: right;
+    font-weight: 600;
+  }
+  .schedule-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.09);
+  }
 
   .contact-form{padding:60px;}
   .form-row{display:grid;grid-template-columns:1fr 1fr;gap:25px;}
-  .form-group{margin-bottom:25px;}
-  .form-group label{display:block;font-weight:700;margin-bottom:10px;font-size:0.9rem;color:var(--primary); text-transform: uppercase; letter-spacing: 0.5px;}
+  .form-group{margin-bottom:24px;}
+  .form-group label{display:block;font-weight:700;margin-bottom:9px;font-size:0.85rem;color:var(--primary); text-transform: uppercase; letter-spacing: 0.6px;}
   .form-control{
-    width:100%;padding:15px;border:1px solid #CBD5E1;border-radius:4px;
-    font-family:inherit;font-size:1rem;background:var(--paper);
-    transition:all .3s ease;
+    width:100%;padding:14px 16px;border:1px solid #CBD5E1;border-radius:4px;
+    font-family:inherit;font-size:0.98rem;background:var(--paper);
+    transition:all .3s ease; color: var(--ink);
   }
-  .form-control:focus{outline:none;border-color:var(--accent);background:var(--white); box-shadow: 0 0 0 3px rgba(212,175,55,0.15);}
+  .form-control:focus{outline:none;border-color:var(--accent);background:var(--white); box-shadow: 0 0 0 3px rgba(212,175,55,0.18);}
+  .highlight-pulse {
+    animation: pulseBorder 1.2s ease;
+  }
+  @keyframes pulseBorder {
+    0% { box-shadow: 0 0 0 0 rgba(212,175,55,0.6); border-color: var(--accent); }
+    70% { box-shadow: 0 0 0 10px rgba(212,175,55,0); border-color: var(--accent); }
+    100% { box-shadow: 0 0 0 0 rgba(212,175,55,0); }
+  }
+
   .form-note{
-    font-size:0.9rem;color:var(--text-light);margin-bottom:25px;
+    font-size:0.88rem;color:var(--text-light);margin-bottom:25px;
     padding-left:15px;border-left:3px solid var(--accent); font-style: italic;
   }
   .btn-submit{
     background:var(--primary);color:var(--white);border:2px solid var(--primary);
-    padding:18px 40px;font-size:1.05rem;font-weight:800;cursor:pointer;
+    padding:17px 38px;font-size:1rem;font-weight:800;cursor:pointer;
     transition:all .3s ease; border-radius: 4px; text-transform: uppercase; letter-spacing: 1px;
     display: inline-flex; align-items: center; gap: 10px;
   }
@@ -520,28 +798,136 @@
     line-height: 1.5;
   }
 
-  /* ---------- WHATSAPP FLOTANTE ---------- */
+  /* ---------- WHATSAPP FLOTANTE CON ETIQUETA ---------- */
   .whatsapp-float{
-    position:fixed;bottom:40px;right:40px;
-    width:65px;height:65px;background:var(--whatsapp);color:#fff;
+    position:fixed;bottom:34px;right:34px;
+    width:62px;height:62px;background:var(--whatsapp);color:#fff;
     display:flex;align-items:center;justify-content:center;
-    font-size:32px;text-decoration:none;border-radius:50%;
+    font-size:31px;text-decoration:none;border-radius:50%;
     box-shadow:0 10px 25px rgba(37,211,102,0.4);z-index:100;
-    transition:transform .3s ease;
+    transition:transform .3s ease, box-shadow .3s ease;
   }
-  .whatsapp-float:hover{transform:scale(1.1);}
+  .whatsapp-float:hover{transform:scale(1.08); box-shadow:0 14px 30px rgba(37,211,102,0.55);}
+  .wa-tooltip {
+    position: absolute;
+    right: 74px;
+    background: var(--ink);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.76rem;
+    font-weight: 700;
+    white-space: nowrap;
+    padding: 7px 13px;
+    border-radius: 4px;
+    border: 1px solid rgba(212,175,55,0.35);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(8px);
+    transition: all 0.25s ease;
+  }
+  .whatsapp-float:hover .wa-tooltip {
+    opacity: 1;
+    transform: translateX(0);
+  }
 
-  /* ---------- FOOTER ---------- */
+  /* ---------- FOOTER CORPORATIVO CON LOGO ---------- */
   footer{
-    background: #030811; color:rgba(255,255,255,0.5);
-    padding:40px 6%;
-    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px;
-    font-size:0.9rem; border-top: 2px solid var(--secondary);
+    background: #030811;
+    color:rgba(255,255,255,0.65);
+    padding: 65px 6% 35px;
+    font-size:0.9rem;
+    border-top: 2px solid rgba(212,175,55,0.25);
   }
-  footer .foot-brand{color:rgba(255,255,255,0.8);font-weight:700;}
+  .footer-grid {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1.2fr;
+    gap: 50px;
+    padding-bottom: 45px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .footer-brand-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    text-decoration: none;
+    margin-bottom: 18px;
+  }
+  .footer-brand-box img {
+    height: 44px;
+    filter: contrast(1.1);
+  }
+  .footer-col h4 {
+    color: var(--white);
+    font-size: 0.92rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 18px;
+    font-weight: 800;
+  }
+  .footer-col p {
+    font-size: 0.88rem;
+    line-height: 1.65;
+    max-width: 360px;
+  }
+  .footer-info-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 0.88rem;
+  }
+  .footer-info-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.55;
+  }
+  .footer-info-list i {
+    color: var(--accent);
+    margin-top: 4px;
+    width: 16px;
+    text-align: center;
+  }
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .footer-links a {
+    text-decoration: none;
+    font-size: 0.88rem;
+    transition: color 0.2s ease;
+  }
+  .footer-links a:hover {
+    color: var(--accent);
+  }
+  .footer-bottom {
+    max-width: 1280px;
+    margin: 28px auto 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.5);
+  }
+  .footer-bottom-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255,255,255,0.88);
+    font-weight: 700;
+  }
+  .footer-bottom-brand img {
+    height: 24px;
+  }
 
   /* ---------- REVEAL ANIMATION ---------- */
-  .reveal{opacity:0;transform:translateY(40px);transition:opacity 0.8s ease, transform 0.8s ease;}
+  .reveal{opacity:0;transform:translateY(32px);transition:opacity 0.75s ease, transform 0.75s ease;}
   .reveal.active{opacity:1;transform:translateY(0);}
 
   @keyframes fadeInUp {
@@ -551,36 +937,57 @@
 
   /* ---------- RESPONSIVE ---------- */
   @media (max-width:992px){
+    .topbar { display: none; }
     .stat-strip .wrap{grid-template-columns:repeat(2,1fr);}
     .stat:nth-child(3){border-left:none;}
-    .about,.area,.contact-grid{grid-template-columns:1fr;}
-    .about{text-align:left;padding:80px 6%;}
+    .about,.area,.contact-grid,.workflow-strip,.footer-grid{grid-template-columns:1fr;}
+    .about{text-align:left;padding:80px 6%; gap: 45px;}
     .about-image img{height:auto;}
     .contact-info,.contact-form{padding:40px;}
     .form-row{grid-template-columns:1fr;}
-    .hero h1{font-size: 3rem;}
+    .hero h1{font-size: 2.9rem;}
   }
   @media (max-width:768px){
     .nav-inner { justify-content: space-between; }
     nav ul{
       position:fixed;top:0;right:0;height:100vh;width:80%;max-width:320px;
       background:var(--primary);flex-direction:column;justify-content:center;
-      align-items:flex-start;padding:0 40px;gap:35px;
+      align-items:flex-start;padding:0 40px;gap:32px;
       transform:translateX(100%);transition:transform .4s ease;
       border-left:2px solid var(--accent);
     }
     nav ul.open{transform:translateX(0);}
     .nav-toggle{display:block; margin-left: auto;}
-    .hero{padding:140px 6% 60px; background-attachment: scroll;}
+    .hero{padding:130px 6% 60px; background-attachment: scroll;}
+    .hero-badges { gap: 18px; flex-direction: column; align-items: center; }
     .stat-strip .wrap{grid-template-columns:1fr 1fr;}
-    .stat {padding: 30px 15px;}
+    .stat {padding: 28px 15px;}
     .section{padding:80px 6%;}
+    .wa-tooltip { display: none; }
   }
 </style>
 </head>
 <body>
 
-<header>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<header id="mainHeader">
+  <!-- Barra Institucional B2B -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <span><span class="status-dot"></span> Atención Exclusiva Mayorista (B2B)</span>
+      <span><i class="fas fa-location-dot"></i> Roque Sáenz Peña N.º 2552, Santa Fe</span>
+    </div>
+    <div class="topbar-right">
+      <span>
+        <i class="far fa-clock"></i>
+        <strong>Lun a Vie:</strong> 08:00 a 13:00 y 15:30 a 20:00 hs.
+        <span class="topbar-sep">|</span>
+        <strong>Sábados:</strong> 09:00 a 12:00 hs.
+      </span>
+    </div>
+  </div>
+
   <div class="nav-inner">
     <a href="#inicio" class="logo-container nav-scroll">
       <img src="image_318c48.png" alt="Logo Malvicino Hnos">
@@ -589,7 +996,7 @@
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menú"><i class="fas fa-bars"></i></button>
     <nav>
       <ul id="navList">
-        <li><a href="#inicio" class="nav-scroll">Inicio</a></li>
+        <li><a href="#inicio" class="nav-scroll active-link">Inicio</a></li>
         <li><a href="#nosotros" class="nav-scroll">La Empresa</a></li>
         <li><a href="#catalogo" class="nav-scroll">Productos</a></li>
         <li><a href="#cobertura" class="nav-scroll">Cobertura</a></li>
@@ -601,23 +1008,45 @@
 
 <section id="inicio" class="hero">
   <div class="hero-content">
-    <div class="hero-eyebrow">Distribución Mayorista B2B</div>
+    <div class="hero-eyebrow"><i class="fas fa-boxes-stacked"></i> Distribución Mayorista B2B</div>
     <h1>Tu enlace <span class="text-gold">comercial</span> y <span class="text-gold">logístico</span> B2B</h1>
     <p class="hero-lead">Más de 75 años uniendo la fábrica con su punto de venta.</p>
     <p class="hero-desc">Gestionamos el volumen, los camiones y el traslado para la Línea Tecnológica exclusivamente en Santa Fe y Rafaela. Trato directo con fábrica, gestión logística integral y respaldo de dos generaciones.</p>
     <div class="hero-actions">
-      <a href="#catalogo" class="btn-primary nav-scroll">Ver catálogo mayorista</a>
+      <a href="#catalogo" class="btn-primary nav-scroll">Ver catálogo mayorista <i class="fas fa-chevron-down" style="font-size:0.85rem;"></i></a>
       <a href="#contacto" class="btn-ghost nav-scroll">Hablar con un asesor</a>
+    </div>
+
+    <div class="hero-badges">
+      <div><i class="fas fa-check-circle"></i> Abastecimiento por bulto cerrado</div>
+      <div><i class="fas fa-check-circle"></i> Sin intermediarios comerciales</div>
+      <div><i class="fas fa-check-circle"></i> Entrega coordinada en destino</div>
     </div>
   </div>
 </section>
 
 <div class="stat-strip">
   <div class="wrap">
-    <div class="stat"><div class="num">1949</div><div class="label">Año de fundación</div></div>
-    <div class="stat"><div class="num">B2B</div><div class="label">Distribución exclusiva</div></div>
-    <div class="stat"><div class="num">4</div><div class="label">Provincias de cobertura</div></div>
-    <div class="stat"><div class="num">2da</div><div class="label">Generación familiar</div></div>
+    <div class="stat">
+      <div class="num">1949</div>
+      <div class="label">Año de fundación</div>
+      <div class="sublabel">+75 años de trayectoria</div>
+    </div>
+    <div class="stat">
+      <div class="num">B2B</div>
+      <div class="label">Distribución exclusiva</div>
+      <div class="sublabel">Atención a comercios</div>
+    </div>
+    <div class="stat">
+      <div class="num">4</div>
+      <div class="label">Provincias de cobertura</div>
+      <div class="sublabel">Red logística activa</div>
+    </div>
+    <div class="stat">
+      <div class="num">2da</div>
+      <div class="label">Generación familiar</div>
+      <div class="sublabel">Sede en Santa Fe Capital</div>
+    </div>
   </div>
 </div>
 
@@ -626,7 +1055,7 @@
     <img src="camion_logistica.png.jpg" alt="Logística y Distribución Malvicino Hnos." style="max-width: 100%; height: auto; object-fit: cover;">
   </div>
   <div class="about-text reveal">
-    <span class="tag">LA EMPRESA</span>
+    <span class="tag">01 / LA EMPRESA</span>
     <h2>Evolución, experiencia y lealtad <span class="text-gold">comercial</span>.</h2>
     <p>Con más de 75 años de trayectoria ininterrumpida, somos un referente indiscutido en la comercialización y distribución mayorista de la región.</p>
     <p>Hoy, impulsados por la <span class="highlight">segunda generación</span> y operando desde nuestra sede administrativa en Santa Fe, mantenemos intactos los valores que nos hicieron grandes: absorber la carga operativa del comercio y velar porque sus estantes nunca estén vacíos.</p>
@@ -636,7 +1065,7 @@
 
 <section id="catalogo" class="section">
   <div class="section-head reveal">
-    <span class="tag">CATÁLOGO</span>
+    <span class="tag">02 / CATÁLOGO MAYORISTA</span>
     <h2>Línea de tecnología hogareña</h2>
     <p>Artículos de alta rotación y excelente margen de rentabilidad, listos para reposición mayorista.</p>
   </div>
@@ -731,11 +1160,36 @@
       </div>
     </div>
   </div>
+
+  <!-- Circuito Operativo Mayorista -->
+  <div class="workflow-strip reveal">
+    <div class="wf-step">
+      <div class="wf-num">01</div>
+      <div class="wf-text">
+        <h4>Solicitud de Cotización</h4>
+        <p>Seleccione el artículo de interés en nuestro catálogo o consúltenos por abastecimiento de línea alimenticia.</p>
+      </div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-num">02</div>
+      <div class="wf-text">
+        <h4>Confirmación Comercial</h4>
+        <p>Un asesor verifica disponibilidad inmediata, condiciones vigentes por volumen y facturación directa.</p>
+      </div>
+    </div>
+    <div class="wf-step">
+      <div class="wf-num">03</div>
+      <div class="wf-text">
+        <h4>Despacho Programado</h4>
+        <p>Coordinamos la logística y el transporte hasta la puerta de su depósito o comercio en tiempo y forma.</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section id="cobertura" class="area">
   <div class="area-text reveal">
-    <span class="tag">COBERTURA</span>
+    <span class="tag">03 / LOGÍSTICA Y COBERTURA</span>
     <h2>Gestión <span class="text-gold">logística</span>, sin sorpresas.</h2>
     <p>Operamos exclusivamente en la Provincia de Santa Fe y la ciudad de Rafaela para la distribución de la <strong>Línea de Tecnología Hogareña</strong>. <br><br><em> Nota: Para el rubro alimenticio nuestra zona de actuación es más amplia (incluyendo Córdoba, Entre Ríos y Corrientes). Utilice el formulario para más consultas.</em></p>
     
@@ -747,17 +1201,26 @@
     </ul>
   </div>
   <div class="area-visual reveal">
+    <span class="area-visual-badge">Exclusividad Línea Tecnológica</span>
     <div class="big">Santa Fe <span>&</span></div>
     <div class="big">Rafaela</div>
-    <div class="caption">Zonas de distribución exclusiva y directa para tecnología.</div>
+    <div class="caption">Zonas de distribución oficial y directa para artículos tecnológicos.</div>
     <hr>
-    <div class="caption">Sede administrativa: Roque Sáenz Peña N.º 2552, Santa Fe.</div>
+    <div class="caption" style="color:var(--primary); font-weight:700;">Alcance Regional — Rubro Alimenticio:</div>
+    <div class="province-pills">
+      <span class="province-pill">Santa Fe</span>
+      <span class="province-pill">Córdoba</span>
+      <span class="province-pill">Entre Ríos</span>
+      <span class="province-pill">Corrientes</span>
+    </div>
+    <hr>
+    <div class="caption"><i class="fas fa-location-dot" style="color:var(--accent); margin-right:6px;"></i> Sede administrativa: Roque Sáenz Peña N.º 2552, Santa Fe.</div>
   </div>
 </section>
 
 <section id="contacto" class="contact-section">
   <div class="section-head reveal">
-    <span class="tag">CONTACTO</span>
+    <span class="tag">04 / CANAL MAYORISTA</span>
     <h2>Inicie su abastecimiento</h2>
     <p>Complete el formulario o escríbanos directo. Un asesor corporativo atenderá su solicitud.</p>
   </div>
@@ -774,11 +1237,22 @@
         </div>
       </div>
 
+      <!-- Horario Operativo estructurado en cuadro -->
       <div class="contact-item">
         <i class="fas fa-clock"></i>
-        <div>
+        <div style="width: 100%;">
           <h4>Horario operativo</h4>
-          <p>Lunes a viernes<br>08:00 a 20:00 hs.</p>
+          <div class="schedule-box">
+            <div class="schedule-row">
+              <span class="schedule-day">Lunes a Viernes</span>
+              <span class="schedule-hours">08:00 a 13:00 hs.<br>15:30 a 20:00 hs.</span>
+            </div>
+            <div class="schedule-divider"></div>
+            <div class="schedule-row">
+              <span class="schedule-day">Sábados</span>
+              <span class="schedule-hours">09:00 a 12:00 hs.</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -854,28 +1328,105 @@
 </section>
 
 <footer>
-  <span class="foot-brand">Malvicino Hnos. S.R.L.</span>
-  <span>&copy; 2026 Todos los derechos reservados.</span>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <a href="#inicio" class="footer-brand-box nav-scroll">
+        <img src="image_318c48.png" alt="Logo Malvicino Hnos">
+        <div class="logo-text">Malvicino Hnos.<span>S.R.L. — DESDE 1949</span></div>
+      </a>
+      <p>Comercialización y distribución mayorista B2B. Más de siete décadas conectando fábricas líderes con puntos de venta en el centro y litoral argentino.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Secciones</h4>
+      <ul class="footer-links">
+        <li><a href="#inicio" class="nav-scroll">Inicio</a></li>
+        <li><a href="#nosotros" class="nav-scroll">La Empresa</a></li>
+        <li><a href="#catalogo" class="nav-scroll">Catálogo Tecnológico</a></li>
+        <li><a href="#cobertura" class="nav-scroll">Zonas de Cobertura</a></li>
+        <li><a href="#contacto" class="nav-scroll">Solicitar Presupuesto</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Sede Administrativa</h4>
+      <ul class="footer-info-list">
+        <li>
+          <i class="fas fa-location-dot"></i>
+          <span>Roque Sáenz Peña N.º 2552, Santa Fe Capital</span>
+        </li>
+        <li>
+          <i class="far fa-clock"></i>
+          <span><strong>Lun a Vie:</strong> 08:00 a 13:00 y 15:30 a 20:00 hs.<br><strong>Sábados:</strong> 09:00 a 12:00 hs.</span>
+        </li>
+        <li>
+          <i class="far fa-envelope"></i>
+          <span>malvicinosrl@gmail.com</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-bottom-brand">
+      <img src="image_318c48.png" alt="Logo Malvicino Hnos">
+      <span>Malvicino Hnos. S.R.L. — Venta Exclusiva Mayorista</span>
+    </div>
+    <span>&copy; 2026 Todos los derechos reservados.</span>
+  </div>
 </footer>
 
 <a href="https://wa.me/5493426108806?text=Hola,%20Malvicino%20Hnos.%20SRL,%20los%20contacto%20desde%20la%20web%20para%20obtener%20mas%20informacion." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+  <span class="wa-tooltip">Atención Mayorista Directa</span>
   <i class="fab fa-whatsapp"></i>
 </a>
 
 <script>
-  function reveal(){
+  // 1. ANIMACIÓN DE APARICIÓN Y BARRA DE PROGRESO + SCROLLSPY
+  const mainHeader = document.getElementById('mainHeader');
+  const scrollProgress = document.getElementById('scrollProgress');
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('nav ul li a:not(.btn-nav)');
+
+  function handleScroll(){
+    const scrollY = window.pageYOffset;
+
+    // Header compacto al bajar
+    if(scrollY > 40){
+      mainHeader.classList.add('scrolled');
+    } else {
+      mainHeader.classList.remove('scrolled');
+    }
+
+    // Progreso de lectura superior
+    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const progress = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
+    scrollProgress.style.width = progress + '%';
+
+    // Aparición suave de elementos
     document.querySelectorAll(".reveal").forEach(el=>{
       const top = el.getBoundingClientRect().top;
-      if(top < window.innerHeight - 100){ 
+      if(top < window.innerHeight - 90){ 
         el.classList.add("active"); 
-      } else {
-        el.classList.remove("active");
+      }
+    });
+
+    // ScrollSpy: iluminar sección activa en el menú
+    sections.forEach(sec => {
+      const secTop = sec.offsetTop - 160;
+      const secHeight = sec.offsetHeight;
+      const id = sec.getAttribute('id');
+      if(scrollY >= secTop && scrollY < secTop + secHeight){
+        navLinks.forEach(link => {
+          link.classList.remove('active-link');
+          if(link.getAttribute('href') === '#' + id){
+            link.classList.add('active-link');
+          }
+        });
       }
     });
   }
-  window.addEventListener("scroll", reveal);
-  reveal(); 
+  window.addEventListener("scroll", handleScroll);
+  handleScroll();
 
+  // 2. MENÚ MÓVIL Y NAVEGACIÓN SUAVE CON PRE-LLENADO INTELIGENTE
   const toggle = document.getElementById('navToggle');
   const toggleIcon = toggle.querySelector('i');
   const navList = document.getElementById('navList');
@@ -902,7 +1453,7 @@
       e.preventDefault();
       const target = document.querySelector(this.getAttribute('href'));
       if(!target) return;
-      const offset = 90;
+      const offset = 85;
       const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
       window.scrollTo({top, behavior:'smooth'});
       
@@ -914,18 +1465,22 @@
         const textarea = document.getElementById('mensajeInput');
         if (textarea) {
           textarea.value = `Hola, me interesa solicitar cotización mayorista de: ${product}.\nVolumen estimado y localidad de entrega: `;
-          setTimeout(() => textarea.focus(), 600);
+          setTimeout(() => {
+            textarea.focus();
+            textarea.classList.remove('highlight-pulse');
+            void textarea.offsetWidth;
+            textarea.classList.add('highlight-pulse');
+          }, 650);
         }
       }
     });
   });
 
-  // CONFIRMACIÓN VISUAL DE ENVÍO DEL FORMULARIO
+  // 3. CONFIRMACIÓN VISUAL DE ENVÍO DEL FORMULARIO (AJAX)
   const mayoristaForm = document.getElementById('mayoristaForm');
   const submitBtn = document.getElementById('submitBtn');
   const formSuccess = document.getElementById('formSuccess');
 
-  // Si vuelve redirigido con ?enviado=1, mostrar el cartel verde
   if (window.location.search.includes('enviado=1')) {
     formSuccess.style.display = 'flex';
     if (window.history.replaceState) {
@@ -933,7 +1488,6 @@
     }
   }
 
-  // Envío directo sin recargar la página y aviso instantáneo
   mayoristaForm.addEventListener('submit', function(e) {
     e.preventDefault();
     formSuccess.style.display = 'none';
